@@ -30,7 +30,7 @@ function drawnFood() {
 	context.fillRect(food.x, food.y, box, box);
 }
 
-document.addEventListener("keydown", update);
+document.addEventListener('keydown', update);
 
 function update (event) {
 	if(event.keyCode == 37 && direction != "right") direction = "left";
@@ -57,7 +57,14 @@ function iniciarJogo() {
 	if(direction == "up") cobraY -= box;
 	if(direction == "down") cobraY += box;
 
-	cobra.pop();
+	if(cobraX != food.x || cobraY != food.y) {
+		cobra.pop();
+	}
+	else {food.x = Math.floor(Math.random() * 15 + 1) * box;
+		food.y = Math.floor(Math.random() * 15 + 1) * box;
+}
+
+	
 
 	let newHead = {
 		x: cobraX,
