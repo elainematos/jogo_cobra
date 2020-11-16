@@ -1,3 +1,4 @@
+
 let canvas = document.getElementById("cobra"); 
 let context =canvas.getContext("2d");
 let box = 32;
@@ -28,7 +29,12 @@ function criarCobrinha() {
 function drawnFood() {
 	context.fillStyle = "red";
 	context.fillRect(food.x, food.y, box, box);
+
+	
+
 }
+
+
 
 document.addEventListener('keydown', update);
 
@@ -40,10 +46,18 @@ function update (event) {
 }
 
 function iniciarJogo() {
+
 	if(cobra[0].x > 15 * box && direction == "right") cobra[0].x = 0;
 	if(cobra[0].x < 0 && direction == "left") cobra[0].x = 16 * box;
 	if(cobra[0].y > 15 * box && direction == "down") cobra[0].y = 0;
 	if(cobra[0].y < 0 && direction == "up") cobra[0].y = 16 * box;
+
+	for(i =1; i < cobra.length; i++) {
+		if(cobra[0].x == cobra[i].x && cobra[0].y == cobra[i].y) {
+			clearInterval(jogo);
+			alert('Game Over :(' );
+		}
+	}
 
 	criarBG(); 
 	criarCobrinha();
@@ -57,15 +71,18 @@ function iniciarJogo() {
 	if(direction == "up") cobraY -= box;
 	if(direction == "down") cobraY += box;
 
-	if(cobraX != food.x || cobraY != food.y) {
-		cobra.pop();
-	}
-	else {food.x = Math.floor(Math.random() * 15 + 1) * box;
-		food.y = Math.floor(Math.random() * 15 + 1) * box;
-}
-
 	
+	if(cobraX != food.x || cobraY != food.y) {
 
+		cobra.pop();
+
+	}else {food.x = Math.floor(Math.random() * 15 + 1) * box;
+		   food.y = Math.floor(Math.random() * 15 + 1) * box;
+
+
+	} 
+
+    
 	let newHead = {
 		x: cobraX,
 		y: cobraY
@@ -73,5 +90,6 @@ function iniciarJogo() {
 
 	cobra.unshift(newHead);
 }
+
 let jogo = setInterval(iniciarJogo, 100);
 
