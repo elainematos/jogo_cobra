@@ -7,7 +7,11 @@ cobra[0] = {
 	y: 8 * box
 
 }
-let direcao = "right";
+let direction = "right";
+let food = {
+	x: Math.floor(Math.random() * 15 + 1) * box,
+	y: Math.floor(Math.random() * 15 + 1) * box
+}
 
 function criarBG() {
 	context.fillStyle = "lightgreen";
@@ -21,31 +25,37 @@ function criarCobrinha() {
 	}
 }
 
+function drawnFood() {
+	context.fillStyle = "red";
+	context.fillRect(food.x, food.y, box, box);
+}
+
 document.addEventListener("keydown", update);
 
 function update (event) {
-	if(event.keyCode == 37 && direcao != "right") direcao = "left";
-	if(event.keyCode == 38 && direcao != "down") direcao = "up";
-	if(event.keyCode == 39 && direcao != "left") direcao = "right";
-	if(event.keyCode == 40 && direcao != "up") direcao = "down";
+	if(event.keyCode == 37 && direction != "right") direction = "left";
+	if(event.keyCode == 38 && direction != "down") direction = "up";
+	if(event.keyCode == 39 && direction != "left") direction = "right";
+	if(event.keyCode == 40 && direction != "up") direction = "down";
 }
 
 function iniciarJogo() {
-	if(cobra[0].x > 15 * box && direcao == "right") cobra[0].x = 0;
-	if(cobra[0].x < 0 && direcao == "left") cobra[0].x = 16 * box;
-	if(cobra[0].y > 15 * box && direcao == "down") cobra[0].y = 0;
-	if(cobra[0].y < 0 && direcao == "up") cobra[0].y = 16 * box;
+	if(cobra[0].x > 15 * box && direction == "right") cobra[0].x = 0;
+	if(cobra[0].x < 0 && direction == "left") cobra[0].x = 16 * box;
+	if(cobra[0].y > 15 * box && direction == "down") cobra[0].y = 0;
+	if(cobra[0].y < 0 && direction == "up") cobra[0].y = 16 * box;
 
 	criarBG(); 
 	criarCobrinha();
+	drawnFood();
 
 	let cobraX = cobra[0].x;
 	let cobraY = cobra[0].y;
 
-	if(direcao == "right") cobraX += box;
-	if(direcao == "left") cobraX -= box;
-	if(direcao == "up") cobraY -= box;
-	if(direcao == "down") cobraY += box;
+	if(direction == "right") cobraX += box;
+	if(direction == "left") cobraX -= box;
+	if(direction == "up") cobraY -= box;
+	if(direction == "down") cobraY += box;
 
 	cobra.pop();
 
@@ -54,7 +64,7 @@ function iniciarJogo() {
 		y: cobraY
 	}
 
-	cobra.unshif(newHead);
+	cobra.unshift(newHead);
 }
 let jogo = setInterval(iniciarJogo, 100);
 
