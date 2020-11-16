@@ -1,1 +1,1 @@
-Jogo da cobrinha que consiste em se mover por todos os lados do box, ocom o objetivo de pegar as frutinhas, e crescer só vai parar o jogo quando a cabeça tocar no corpo.
+Jogo da cobrinha consiste no mover por todos os lados do box, com o objetivo de pegar as frutinhas, e ir crescendo, só encerra o jogo quando a cabeça toca no corpo.
